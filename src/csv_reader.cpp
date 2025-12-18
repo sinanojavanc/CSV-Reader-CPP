@@ -35,34 +35,52 @@ bool csvrdr::readLine(string& line){
     return static_cast<bool>(getline(iFile, line));
 }
 
-vector<string> split(const string& line){
-    vector<string> temp;
-    string remaining = line;
-    size_t  Index;
 
-    while (!remaining.empty())
-    {   
-        Index = remaining.find(',');
-        if (Index == string::npos) 
+vector<string> split(const string& line) {
+    vector<string> result;
+    string field;
+    bool inQuotes = false;
+
+    for (size_t i = 0; i < line.length(); i++) {
+        char c = line[i];
+
+        if (c == '"') 
+            inQuotes = !inQuotes;
+        else if (c == ',' && !inQuotes) 
         {
-            temp.push_back(remaining);
-            break;
+            result.push_back(field);
+            field.clear();
         }
         else 
-        {
-            temp.push_back(remaining.substr(0, Index));
-            remaining = remaining.substr(Index + 1);
-        }
+            field += c;
     }
-    return temp;
+    result.push_back(field);
+    return result;
 }
 
 int main() {
-    string line = "Ali,20,Tehran";
-    vector<string> result = split(line);
+    // هدر CSV: همه رشته‌ها داخل کوتیشن
+    vector<string> headers = {
+        "model", "mpg", "cyl", "disp", "hp",
+        "drat", "wt", "qsec", "vs", "am",
+        "gear", "carb"
+    };
 
-    for (auto& s : result)
-        cout << s << endl;
+    // چاپ هدرها
+    cout << "CSV Headers:" << endl;
+    for (auto& h : headers)
+        cout << " [ " << h << " ] ";
+    cout << "\n\n";
 
+    // نمونه خط CSV
+    string line = "Mazda RX4,21.0,6,160,110,3.9,2.62,16.46,0,1,4,4";
+    vector<string> fields = split(line);
+
+    cout << "CSV Fields:" << endl;
+    for (auto& f : fields)
+        cout << " [ " << f << " ] ";
+    cout << endl;
+
+    cin.get();
     return 0;
 }
