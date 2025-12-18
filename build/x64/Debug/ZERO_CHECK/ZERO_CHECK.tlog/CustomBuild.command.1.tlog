@@ -1,0 +1,10 @@
+^E:\CODEGITHUB\CSV-READER-CPP\BUILD\CMAKEFILES\A262ABBA754667C02D87D80CE09C9F4F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CodeGitHub/CSV-Reader-CPP -BE:/CodeGitHub/CSV-Reader-CPP/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/CodeGitHub/CSV-Reader-CPP/build/CSV-Reader.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

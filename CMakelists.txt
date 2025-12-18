@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 4.1.2)
+project(CSV-Reader)
+
+set(SOURCE
+        ../src/csv_reader.cpp
+)
+
+add_executable(CSV-Reader ${SOURCE})
